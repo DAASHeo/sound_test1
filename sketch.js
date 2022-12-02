@@ -1,31 +1,19 @@
-var wave;
-var playing = false;
+let r,g,b;
 
-var button;
-function setup() {
-  createCanvas(640, 440);
-  wave = new p5.Oscillator();
-  wave.setType('sine');
-  wave.freq(440); //440 4옥타브 라(가온 다) -> 기준점
-  wave.amp(0); //volume
-
-  button = createButton('play/pause');
-  button.mousePressed(toggle);
+function setup(){
+	createCanvas(displayWidth, displayHeight);
+	r = random(50,255);
+	g = random(0,200);
+	b = random(50,255);
 }
 
+function draw(){
+	background(r,g,b);
+	console.log('draw');
+}
 
-// function draw() {
-//   background(220);
-// }
-
-function toggle(){
-  if(!playing){
-    wave.start();
-    wave.amp(0.5,1);
-    playing=true;
-  }
-  else{
-    wave.amp(0,1);
-    playing = false;
-  }
+function deviceMoved(){
+    r = map(acceleration, -90, 90, 100, 175);
+    g = map(acceleration, -90, 90, 100, 200);
+    b = map(acceleration, -90, 90, 100, 200);
 }
